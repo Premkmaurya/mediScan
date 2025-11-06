@@ -1,27 +1,30 @@
 import React, { useState } from "react";
-import loginSideImage from "../assets/login-img.jpg"
+import loginSideImage from "../assets/login-img.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const App = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
+  const navigate = useNavigate();
 
-  // Simple function to simulate login
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const submitHandler = async (e) => {
     setLoading(true);
-    
-    const response = await axios.post("http://localhost:3000/api/auth/login",)
 
-    // Simulate API call delay
-    setTimeout(() => {
-      setLoading(false);
-      // In a real app, you'd handle Firebase authentication here
-      console.log("Login successful (simulated).");
-    }, 1500);
+    const response = await axios.post("http://localhost:3000/api/auth/login",e,{
+      withCredentials:true
+    })
+    if (response.status===400) {
+      alert(response.data.message)
+    }
+    setLoading(false)
+    navigate("/")
+
   };
 
   return (
@@ -47,7 +50,7 @@ const App = () => {
           </div>
 
           {/* --- Login Form --- */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(submitHandler)} className="space-y-6">
             {/* Email Input */}
             <div>
               <label
@@ -57,14 +60,17 @@ const App = () => {
                 Email
               </label>
               <input
-                id="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", { required: "Email is required" })}
                 placeholder="you@example.com"
                 required
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 shadow-inner text-gray-800 placeholder-gray-400"
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Password Input */}
@@ -76,14 +82,15 @@ const App = () => {
                 Password
               </label>
               <input
-                id="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", { required: "password is required" })}
                 placeholder="Enter your password"
                 required
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 shadow-inner text-gray-800 placeholder-gray-400"
               />
+               {errors.password && (
+              <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+            )}
             </div>
 
             {/* Login Button with Gradient */}
@@ -124,8 +131,8 @@ const App = () => {
           {/* Sign Up Link */}
           <p className="text-center flex item-center justify-end text-sm text-gray-500 mt-6">
             Don't have an account?
-            <p 
-              onClick={()=>navigate("/register")}
+            <p
+              onClick={() => navigate("/register")}
               href="#"
               className="font-semibold cursor-pointer text-blue-500 hover:text-blue-600 ml-1 transition-colors"
             >

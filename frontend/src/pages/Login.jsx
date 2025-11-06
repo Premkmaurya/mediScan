@@ -16,7 +16,7 @@ const App = () => {
   const submitHandler = async (e) => {
     setLoading(true);
 
-    const response = await axios.post("http://localhost:3000/api/auth/login",e,{
+    const response = await axios.post("https://mediscan-eqyv.onrender.com//api/auth/login",e,{
       withCredentials:true
     })
     if (response.status===400) {

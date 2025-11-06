@@ -25,7 +25,7 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    const socketInstance = io("http://localhost:3000", {
+    const socketInstance = io("https://mediscan-eqyv.onrender.com/", {
       withCredentials: true,
     });
     if (!socketInstance) {

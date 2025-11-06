@@ -1,7 +1,9 @@
 import React from "react";
 import heroImg from '../assets/hero-medical.png'
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate()
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-white to-blue-50 py-16 md:py-24">
       <div className="container mx-auto px-6 lg:px-12 flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
@@ -27,7 +29,7 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <button className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow transition">
+            <button onClick={()=>navigate("/chat")} className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow transition">
               Get Started Free →
             </button>
           </div>

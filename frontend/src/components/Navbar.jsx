@@ -20,10 +20,10 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <button onClick={()=>Navigate("/sign-in")} className="px-5 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+          <button onClick={()=>navigate("/sign-in")} className="px-5 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition">
             Sign in
           </button>
-          <button className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition shadow">
+          <button onClick={()=>navigate("/chat")} className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition shadow">
             Get Started
           </button>
         </div>

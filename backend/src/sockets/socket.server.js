@@ -1,3 +1,4 @@
+// initServer.js (CommonJS)
 const { Server } = require("socket.io");
 const { genrateResponse } = require("../services/ai.service");
 const { v4: uuidv4 } = require("uuid");
@@ -5,11 +6,12 @@ const messageModel = require("../models/message.model");
 const cookie = require("cookie");
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 function initServer(httpServer) {
   const io = new Server(httpServer, {
     cors: {
-      origin: "https://mediscan-1-kap4.onrender.com/",
+      origin: "http://localhost:5173",
       credentials: true,
     },
   });

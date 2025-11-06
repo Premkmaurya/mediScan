@@ -235,6 +235,7 @@ const ChatPage = () => {
         </div>
         <input
           type="text"
+          autoFocus
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder={

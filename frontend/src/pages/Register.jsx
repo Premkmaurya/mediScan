@@ -8,7 +8,7 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     // handle registration logic here
-    const response = await axios.post("http://localhost:3000/api/auth/register",data,{
+    const response = await axios.post("https://mediscan-1-kap4.onrender.com/api/auth/register",data,{
       withCredentials:true
     })
   };

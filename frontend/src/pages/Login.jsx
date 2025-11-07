@@ -10,7 +10,7 @@ export default function Login() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
-    const response = await axios.post("http://localhost:3000/api/auth/login",data,{
+    const response = await axios.post("https://mediscan-1-kap4.onrender.com/api/auth/login",data,{
       withCredentials:true
     })
     navigate("/")

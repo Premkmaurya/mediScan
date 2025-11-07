@@ -14,7 +14,7 @@ async function authMiddleware(req,res,next) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // Corrected line: Use the ID from the decoded payload to find the user
-        const user = await userModel.findById(decoded.id);
+        const user = await userModel.findById(decoded.id).lean();
 
         if (!user) {
             return res.status(401).json({

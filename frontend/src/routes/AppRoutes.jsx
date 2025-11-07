@@ -3,16 +3,13 @@ import { Route, Routes } from 'react-router-dom'
 import Login from '../pages/Login'
 import Home from '../pages/Home'
 import Register from '../pages/Register'
-import ProtectedRoute from './ProtectedRoute'
+import Chat from '../pages/Chat'
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={
-        <ProtectedRoute>
-          <Home />
-        </ProtectedRoute>
-      } />
+      <Route path='/' element={<Home />} />
+      <Route path='/chat' element={<Chat />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
     </Routes>

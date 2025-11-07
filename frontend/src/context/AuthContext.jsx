@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from "axios"
 
 const AuthContext = createContext();
 
@@ -17,13 +18,11 @@ export const AuthProvider = ({ children }) => {
       
       try {
         // Hitting the backend is the ONLY way to check an HttpOnly cookie
-        const response = await fetch('https://mediscan-1-kap4.onrender.com/api/auth/me', {
-          method: 'GET',
-          // Crucial: Tells the browser to attach the HttpOnly cookie
-          credentials: 'include', 
+        const response = await axios.get('https://mediscan-1-kap4.onrender.com/api/auth/me', {
+          withCredentials:true
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
           // Token was valid, backend sent the user data
           const userData = await response.json();
           setUser(userData); 

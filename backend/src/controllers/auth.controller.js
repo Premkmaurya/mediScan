@@ -50,7 +50,7 @@ async function loginUser(req,res) {
 }
 
 async function getMe(req,res) {
-    const user = userModel.findOne({_id:req.user.id})
+    const user = userModel.findOne({_id:req.user.id}).lean().select('-password')
     if (!user) {
         return res.status(400).json({
             message:"user not found"

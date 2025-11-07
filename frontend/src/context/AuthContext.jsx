@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       
       try {
         // Hitting the backend is the ONLY way to check an HttpOnly cookie
-        const response = await fetch('/api/auth/me', {
+        const response = await fetch('https://mediscan-1-kap4.onrender.com/api/auth/me', {
           method: 'GET',
           // Crucial: Tells the browser to attach the HttpOnly cookie
           credentials: 'include', 
